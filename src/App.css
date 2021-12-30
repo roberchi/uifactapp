@@ -82,7 +82,15 @@ div[role="tabpanel"] {
 .layoutHeader {
   grid-area: header;
 }
-
+.previewTooltip {
+  height: 150px;
+  width: 150px;
+  border: gray;
+  border-width: 1px;
+  border-style: solid;
+  display: flex;
+  justify-content: center;
+}
 .layoutMain {
   grid-area: main;
   height: 100%;

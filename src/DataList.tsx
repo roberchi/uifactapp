@@ -11,7 +11,13 @@ import {
 } from "@fluentui/react/lib/DetailsList";
 import { MarqueeSelection } from "@fluentui/react/lib/MarqueeSelection";
 import { mergeStyleSets } from "@fluentui/react/lib/Styling";
-import { TooltipHost } from "@fluentui/react";
+import {
+  TooltipHost,
+  TooltipDelay,
+  DirectionalHint,
+  ITooltipProps,
+  ITooltipHostStyles
+} from "@fluentui/react";
 
 const classNames = mergeStyleSets({
   fileIconHeaderIcon: {
@@ -78,7 +84,10 @@ export interface IDocument {
   fileSizeRaw: number;
 }
 
-export class DetailsListDocumentsExample extends React.Component<
+function onRenderPreview(item: any) {
+  return <div className="previewTooltip">prova</div>;
+}
+export default class DetailsListDocumentsExample extends React.Component<
   {},
   IDetailsListDocumentsExampleState
 > {
@@ -105,7 +114,10 @@ export class DetailsListDocumentsExample extends React.Component<
         maxWidth: 16,
         onColumnClick: this._onColumnClick,
         onRender: (item: IDocument) => (
-          <TooltipHost content={`${item.fileType} file`}>
+          <TooltipHost
+            directionalHint={DirectionalHint.rightCenter}
+            content={onRenderPreview(item)}
+          >
             <img
               src={item.iconName}
               className={classNames.fileIconImg}
@@ -205,37 +217,6 @@ export class DetailsListDocumentsExample extends React.Component<
 
     return (
       <div>
-        <div className={classNames.controlWrapper}>
-          <Toggle
-            label="Enable compact mode"
-            checked={isCompactMode}
-            onChange={this._onChangeCompactMode}
-            onText="Compact"
-            offText="Normal"
-            styles={controlStyles}
-          />
-          <Toggle
-            label="Enable modal selection"
-            checked={isModalSelection}
-            onChange={this._onChangeModalSelection}
-            onText="Modal"
-            offText="Normal"
-            styles={controlStyles}
-          />
-          <TextField
-            label="Filter by name:"
-            onChange={this._onChangeText}
-            styles={controlStyles}
-          />
-          <Announced
-            message={`Number of items after filter applied: ${items.length}.`}
-          />
-        </div>
-        <div className={classNames.selectionDetails}>{selectionDetails}</div>
-        <Announced message={selectionDetails} />
-        {announcedMessage ? (
-          <Announced message={announcedMessage} />
-        ) : undefined}
         {isModalSelection ? (
           <MarqueeSelection selection={this._selection}>
             <DetailsList

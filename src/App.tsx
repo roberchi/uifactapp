@@ -1,5 +1,6 @@
 import React from "react";
 import "./App.css";
+import DetailsListDocumentsExample from "./DataList";
 //import { ActionButton, DefaultButton, IconButton, Label, Panel, PanelType, PrimaryButton, Stack, TextField } from "@fluentui/react";
 import {
   ActionButton,
@@ -23,6 +24,20 @@ import {
 } from "office-ui-fabric-react";
 import { useBoolean } from "@fluentui/react-hooks";
 import { Breadcrumb } from "@fluentui/react/lib/Breadcrumb";
+
+function renderContainer(index: number) {
+  return (
+    <Stack key={index}>
+      <Stack.Item>
+        <TextField label="Name" required></TextField>
+        <IconButton iconProps={{ iconName: "delete" }}></IconButton>
+      </Stack.Item>
+      <Stack.Item>
+        <TextField label="Url" required multiline rows={3}></TextField>
+      </Stack.Item>
+    </Stack>
+  );
+}
 
 function App() {
   const [isOpen, { setTrue: openPanel, setFalse: dismissPanel }] = useBoolean(
@@ -82,20 +97,8 @@ function App() {
           </div>
           <div className="layoutMain">
             <Pivot className="" aria-label="Basic Pivot">
-              <PivotItem
-                className="border pivotItemWithPreview"
-                headerText="Templates"
-              >
-                <div className="border pivotItemData">
-                  <Label>Data #1</Label>
-                  <Label>Data #1</Label>
-                  <Label>Data #1</Label>
-                  <Label>Data #1</Label>
-                  <Label>Data #1</Label>
-                </div>
-                <div className="border pivotItemPreview">
-                  <Label>Preview</Label>
-                </div>
+              <PivotItem className="border" headerText="Templates">
+                <DetailsListDocumentsExample></DetailsListDocumentsExample>
               </PivotItem>
               <PivotItem headerText="Recent">
                 <Label>Pivot #2</Label>
@@ -147,19 +150,5 @@ function renderSettingContent(len: number) {
       </Label>
       {containers}
     </>
-  );
-}
-
-function renderContainer(index: number) {
-  return (
-    <Stack key={index}>
-      <Stack.Item>
-        <TextField label="Name" required></TextField>
-        <IconButton iconProps={{ iconName: "delete" }}></IconButton>
-      </Stack.Item>
-      <Stack.Item>
-        <TextField label="Url" required multiline rows={3}></TextField>
-      </Stack.Item>
-    </Stack>
   );
 }
