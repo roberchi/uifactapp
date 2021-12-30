@@ -36,3 +36,68 @@
     transform: rotate(360deg);
   }
 }
+
+.center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+
+.border{
+  border-style: solid;
+  border-color: red;
+  border-width: 1px;
+}
+
+html, body , .container {
+  height: 100%;
+  margin: 0;
+}
+
+div[role=toolbar]{
+  height: 100%;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: min-content 1fr;
+}
+div[role=tabpanel]{
+  height: 100%;
+}
+.container{
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: min-content 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas: 
+    "header"
+    "main";
+}
+
+.layoutHeader{
+  grid-area: header;
+}
+
+.layoutMain{
+  grid-area: main;
+  height: 100%;
+}
+.pivotItemWithPreview{
+  display: flex;
+  flex-direction:column;
+  
+}
+.pivotItemData{
+  flex: 1 1 auto;
+}
+.pivotItemPreview{
+  flex: 0 0 auto;
+  height: 200px;
+}
+#content:first-child{
+  height: 100%;
+}
